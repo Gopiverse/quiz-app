@@ -1,0 +1,37 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <style>
+        #startQuiz {
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            background-color: #fff;
+            border: 2px solid #4285f4;
+            border-radius: 6px;
+            padding: 10px 20px;
+            font-size: 16px;
+            color: #4285f4;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            
+        }
+          #startQuiz:hover {
+            background-color: #4285f4;
+            color: white;
+        }
+    </style>
+</head>
+<body>
+    
+    <h1>logged in as</h1>
+    <h2 id="userName"></h2>
+    <button id="startQuiz">Start Quiz</button>
+
+    <script type="module" src="update.js"></script>
+    <script type="module" src="score.js"></script>
+</body>
+</html>
