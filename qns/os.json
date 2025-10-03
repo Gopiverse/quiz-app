@@ -1,12 +1,12 @@
 [
   {
-    "count": 1,
+    "used": 0,
     "question": "Which is a type of OS?",
     "options": ["Windows", "Google", "Firefox", "Chrome"],
     "answer": "Windows"
   },
   {
-    "count": 2,
+    "used": 50,
     "question": "What does CPU stand for?",
     "options": ["Central Processing Unit", "Central Power Unit", "Computer Processing Unit", "Central Programming Unit"],
     "answer": "Central Processing Unit"

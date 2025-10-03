@@ -4,7 +4,6 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Questions</title>
-    <link rel="stylesheet" href="styles.css">
 </head>
 <body>
     <div class="container">
@@ -14,5 +13,73 @@
         </div>
         <button id="submitQuiz">Submit Quiz</button>
     </div>
+    <script>
+        const mainC = document.getElementById('qnContainer');
+
+        
+
+        async function loadQns() {
+            const files = [
+                'qns/aptitude1.json',
+                'qns/os.json'
+            ];
+            const allQns = [];
+            
+            for(const file of files) {
+                const res = await fetch(file);
+                const data = await res.json();
+                // console.log(data);
+
+                let minUsedQn = data[0];
+                for(let i=1; i<data.length; i++) {
+                    if(data[i].used < minUsedQn.used) {
+                        minUsedQn = data[i];
+                    } 
+                }
+                // console.log(minUsedQn);
+                allQns.push(minUsedQn);
+            }
+            return allQns;
+        }
+        // loadQns();
+
+        function displayQns(allQns) {
+            const child1 = document.createElement('div');
+            allQns.forEach((item, index) => {
+                const qnDiv = document.createElement('div');
+                qnDiv.className = 'question';
+
+                const qnNoDiv = document.createElement('div');
+                qnNoDiv.className = 'qnno';
+                qnNoDiv.textContent = `Qn ${item.index+1}`;
+                qnDiv.appendChild(qnNoDiv);
+                console.log("appended");
+
+                const qnTextDiv = document.createElement('div');
+                qnTextDiv.textContent = item.question;
+                qnDiv.appendChild(qnTextDiv);
+
+                item.options.forEach(option => {
+                    const optionDiv = document.createElement('div');
+                    optionDiv.textContent = option;
+                    optionDiv.className = 'options';
+                    qnDiv.appendChild(optionDiv);
+                });
+
+                mainC.appendChild(qnDiv);
+
+            });
+        }
+
+        loadQns()
+            .then(allQns => {
+                displayQns(allQns);
+            });
+                    
+
+
+
+        
+    </script>
 </body>
 </html>
