@@ -25,9 +25,18 @@ googleSignIn.addEventListener('click', () => {
     .then((result) => {
         const credential = GoogleAuthProvider.credentialFromResult(result);
         const user = result.user;
-         setTimeout(() => {
-            window.location.href = "logged.html";
-        }, 2000);
+        const email = user.email;
+
+        if (email.endsWith("@gecbh.ac.in")) {
+            console.log("Authorized user:", email);
+            setTimeout(() => {
+                window.location.href = "logged.html";
+            }, 2000);
+        } else {
+            alert("Access denies. Please use College mail id");
+            auth.signOut();
+        }
+         
     }) .catch((error) => {
         const errorCode = error.code;
         const errorMessage = error.message;

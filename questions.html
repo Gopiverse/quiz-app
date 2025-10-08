@@ -4,6 +4,97 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Questions</title>
+    <style>
+        *{
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+         body {
+            font-family: Arial, Helvetica, sans-serif;
+            background: linear-gradient(to right, #6a11cb, #2575fc);
+            min-height: 100vh;
+            display: flex;
+            justify-content: center;
+            align-items: flex-start;
+            padding: 20px;
+        }
+
+         .container {
+            background: #fff;
+            padding: 30px;
+            border-radius: 12px;
+            box-shadow: 0 6px 20px rgba(0,0,0,0.2);
+            width: 100%;
+            max-width: 700px; 
+        }
+
+        h1 {
+            text-align: center;
+            margin-bottom: 20px;
+            color: #333;
+        }
+
+
+        .question {
+            background: #f9f9f9;
+            padding: 20px;
+            margin-bottom: 15px;
+            border-radius: 10px;
+            border: 1px solid #ddd;
+        }
+
+        .qnno {
+            font-weight: bold;
+            color: #2575fc;
+            margin-bottom: 8px;
+            display: block;
+        }
+
+        .question div {
+            margin: 8px 0;
+        }
+
+
+        .options {
+            padding: 10px;
+            border: 1px solid #ccc;
+            border-radius: 8px;
+            margin: 5px 0;
+            cursor: pointer;
+            transition: all 0.3s ease;
+        }
+
+         .options:hover {
+            background: #eaf1ff;
+            border-color: #2575fc;
+        }
+
+        .options.selected {
+            background: #4e89f0;
+            color: #fff;
+            font-weight: bold;
+        }
+
+          #submitQuiz {
+            display: block;
+            width: 100%;
+            padding: 15px;
+            font-size: 16px;
+            font-weight: bold;
+            background: #6a11cb;
+            color: #fff;
+            border: none;
+            border-radius: 8px;
+            margin-top: 20px;
+            cursor: pointer;
+            transition: 0.3s ease;
+        }
+
+        #submitQuiz:hover {
+            background: #2575fc;
+        }
+    </style>
 </head>
 <body>
     <div class="container">
@@ -49,9 +140,9 @@
                 const qnDiv = document.createElement('div');
                 qnDiv.className = 'question';
 
-                const qnNoDiv = document.createElement('div');
+                const qnNoDiv = document.createElement('span');
                 qnNoDiv.className = 'qnno';
-                qnNoDiv.textContent = `Qn ${item.index+1}`;
+                qnNoDiv.textContent = `Qn ${index+1}`;
                 qnDiv.appendChild(qnNoDiv);
                 console.log("appended");
 
@@ -63,13 +154,23 @@
                     const optionDiv = document.createElement('div');
                     optionDiv.textContent = option;
                     optionDiv.className = 'options';
+
+                     optionDiv.addEventListener ('click', () => {
+                        qnDiv.querySelectorAll('.options').forEach(opt => {
+                            opt.classList.remove('selected');
+                        });
+                        optionDiv.classList.add('selected');
+                    });
                     qnDiv.appendChild(optionDiv);
+
                 });
 
                 mainC.appendChild(qnDiv);
 
             });
         }
+
+        
 
         loadQns()
             .then(allQns => {
